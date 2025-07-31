@@ -1,0 +1,10 @@
+@model Receipt
+<h2>Детали поступления №@Model.Number</h2>
+<p>Дата: @Model.Date.ToShortDateString()</p>
+<ul>
+    @foreach (var item in Model.Items)
+{
+    <li>@item.Resource?.Name — @item.Quantity @item.Unit?.Name</li>
+}
+</ul>
+<a asp-action="Index">Назад</a>

@@ -1,0 +1,11 @@
+@model Unit
+<h2>@(Model.Id == 0 ? "Добавить единицу" : "Изменить единицу")</h2>
+<form asp-action="@(Model.Id == 0 ? "Create" : "Edit")">
+    <div>
+        <label>Наименование</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <button type="submit">Сохранить</button>
+</form>
+<a asp-action="Index">Назад</a>

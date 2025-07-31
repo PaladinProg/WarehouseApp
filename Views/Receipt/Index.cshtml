@@ -1,0 +1,29 @@
+@model List<Receipt>
+    <h2>Поступления</h2>
+    <a asp-action="Create">Создать поступление</a>
+    <table>
+        <thead>
+            <tr><th>Номер</th><th>Дата</th><th>Содержимое</th><th>Действия</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+    {
+            <tr>
+                <td>@r.Number</td>
+                <td>@r.Date.ToShortDateString()</td>
+                <td>
+                    <ul>
+                        @foreach (var item in r.Items)
+            {
+                        <li>@item.Resource?.Name (@item.Quantity @item.Unit?.Name)</li>
+            }
+                    </ul>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@r.Id">Детали</a>
+                    <a asp-action="Delete" asp-route-id="@r.Id">Удалить</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>

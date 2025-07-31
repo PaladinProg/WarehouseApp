@@ -1,0 +1,33 @@
+@model Receipt
+@{
+  var resources = ViewBag.Resources as List<Resource>;
+  var units = ViewBag.Units as List<Unit>;
+}
+
+<h2>Новое поступление</h2>
+<form asp-action="Create" method="post">
+    <label>Номер</label>
+    <input asp-for="Number" />
+    <label>Дата</label>
+    <input asp-for="Date" type="date" />
+
+    <div id="items">
+        <h4>Товары</h4>
+        <div>
+            <select name="Items[0].ResourceId">
+                @foreach (var res in resources)
+        {
+                <option value="@res.Id">@res.Name</option>
+        }
+            </select>
+            <select name="Items[0].UnitId">
+                @foreach (var u in units)
+        {
+                <option value="@u.Id">@u.Name</option>
+        }
+            </select>
+            <input name="Items[0].Quantity" placeholder="Кол-во" />
+        </div>
+    </div>
+    <button type="submit">Сохранить</button>
+</form>
